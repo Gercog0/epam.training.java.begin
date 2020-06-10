@@ -1,12 +1,21 @@
 package by.training.hometask1.service;
 
+import by.training.hometask1.exception.UserException;
+import by.training.hometask1.validator.NumberValidator;
+
 public class NumberOperation {
-    public int getLastDigitOfNumber(int number) {
+    public int calculateLastDigitOfNumber(int number) throws UserException {
+        if (number <= 0) {
+            throw new UserException("Incorrect data...");
+        }
         return number % 10;
     }
 
-    public int getLastDigitOfNumberSquare(int number) {
-        int square = getLastDigitOfNumber(number);
+    public int calculateLastDigitOfNumberSquare(int number) throws UserException {
+        if (number <= 0) {
+            throw new UserException("Incorrect data...");
+        }
+        int square = calculateLastDigitOfNumber(number);
         if (square == 1 || square == 9) {
             return 1;
         } else if (square == 2 || square == 8) {
@@ -22,11 +31,18 @@ public class NumberOperation {
         }
     }
 
-    public boolean isTwoNumberEven(int num1, int num2, int num3, int num4) {
+    public boolean isTwoNumberEven(int num1, int num2, int num3, int num4) throws UserException {
+        NumberValidator numberValidator = new NumberValidator();
+        if (!numberValidator.checkForPositiveNumbersInArray(num1, num2, num3, num4)) {
+            throw new UserException("Incorrect data...");
+        }
         return ((num1 & 1) + (num2 & 1) + (num3 & 1) + (num4 & 1)) <= 2;
     }
 
-    public boolean isNumberPerfect(int number) {
+    public boolean isNumberPerfect(int number) throws UserException {
+        if (number < 0) {
+            throw new UserException("Incorrect data...");
+        }
         int sumDigits = 0;
         if (number == 0) {
             return false;
@@ -47,11 +63,15 @@ public class NumberOperation {
         return -1 * Math.pow(x, 2) + 3 * x + 9;
     }
 
-    public double calculateEquationTwo(double x) {
+    public double calculateEquationTwo(double x) throws UserException {
+        NumberValidator numberValidator = new NumberValidator();
+        if (!numberValidator.checkCubeIsSix(x)) {
+            throw new UserException("Incorrect data...");
+        }
         return 1 / (Math.pow(x, 3) - 6);
     }
 
-    public double calculateResultDependingOnXValue(double x) {
+    public double calculateResultDependingOnXValue(double x) throws UserException {
         return x >= 3 ? calculateEquationOne(x) : calculateEquationTwo(x);
     }
 }

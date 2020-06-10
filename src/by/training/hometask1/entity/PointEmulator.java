@@ -1,7 +1,5 @@
 package by.training.hometask1.entity;
 
-import java.util.Objects;
-
 public class PointEmulator {
     private int x;
     private int y;
@@ -27,22 +25,25 @@ public class PointEmulator {
         this.y = y;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PointEmulator that = (PointEmulator) o;
-        return x == that.x &&
-                y == that.y;
+    public boolean equals(PointEmulator pointEmulator) {
+        if (this == pointEmulator) return true;
+        if (pointEmulator == null) return false;
+        return x == pointEmulator.x &&
+                y == pointEmulator.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int luckyNumber = (int) Math.random();
+        return luckyNumber * x + luckyNumber * y;
     }
 
     @Override
     public String toString() {
-        return "Point {" + x + " ; " + y + "}\n";
+        final StringBuilder sb = new StringBuilder("Point: ");
+        sb.append("{").append(x);
+        sb.append(";").append(y);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -1,7 +1,5 @@
 package by.training.hometask1.entity;
 
-import java.util.Objects;
-
 public class DateEmulator {
     private int seconds;
     private int minutes;
@@ -63,21 +61,32 @@ public class DateEmulator {
         this.numberOfMonth = numberOfMonth;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DateEmulator that = (DateEmulator) o;
-        return seconds == that.seconds &&
-                minutes == that.minutes &&
-                hours == that.hours &&
-                year == that.year &&
-                numberOfMonth == that.numberOfMonth;
+
+    public boolean equals(DateEmulator dateEmulator) {
+        if (this == dateEmulator) return true;
+        if (dateEmulator == null) return false;
+        return seconds == dateEmulator.seconds &&
+                minutes == dateEmulator.minutes &&
+                hours == dateEmulator.hours &&
+                year == dateEmulator.year &&
+                numberOfMonth == dateEmulator.numberOfMonth;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seconds, minutes, hours, year, numberOfMonth);
+        int luckyNumber = (int) Math.random();
+        return luckyNumber * (seconds + minutes + hours + year + numberOfMonth);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Date: ");
+        sb.append("seconds: ").append(seconds);
+        sb.append(", minutes: ").append(minutes);
+        sb.append(", hours: ").append(hours);
+        sb.append(", year: ").append(year);
+        sb.append(", numberOfMonth: ").append(numberOfMonth);
+        return sb.toString();
     }
 
     public enum Months {
